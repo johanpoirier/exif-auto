@@ -1,0 +1,15 @@
+{
+  "name": "exif-auto",
+  "version": "0.0.1",
+  "description": "Auto rename photos with infos from exif tags",
+  "private": true,
+  "scripts": {
+    "app": "electron app/"
+  },
+  "devDependencies": {
+    "electron-prebuilt": "^1.2.6"
+  },
+  "dependencies": {
+    "jpeg-exif": "0.0.9"
+  }
+}
