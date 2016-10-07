@@ -3,17 +3,22 @@
   "version": "0.0.1",
   "description": "Auto rename photos with infos from exif tags",
   "private": true,
+  "directories": {
+    "output": "electron-builds"
+  },
   "scripts": {
     "app": "electron app/",
-    "dist": "build",
-    "windows": "build --dir --win",
-    "mac": "build --dir --mac"
+    "windows": "build --win",
+    "mac": "build --mac"
   },
   "build": {
-    "releases": "releases",
+    "releases": "electron-builds/releases",
     "appId": "com.jops.exifauto",
     "category": "public.app-category.utilities",
     "compression": "normal",
+    "mac": {
+      "target": "dmg"
+    },
     "win": {
       "target": "nsis"
     }

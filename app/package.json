@@ -1,9 +1,11 @@
 {
   "name": "exif-auto",
+  "productName": "EXIF Auto",
+  "description": "Auto rename photos with infos from exif tags",
   "version": "0.0.1",
   "author": "JoPs",
-  "description": "Auto rename photos with infos from exif tags",
   "main": "main.js",
+  "license": "MIT",
   "dependencies": {
     "jpeg-exif": "0.0.9",
     "moment": "^2.15.1",

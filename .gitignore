@@ -19,5 +19,4 @@ jspm_packages
 .npm
 .node_repl_history
 .idea/
-releases/
-dist/
+electron-builds/

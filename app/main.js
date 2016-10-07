@@ -45,6 +45,19 @@ app.on('activate', () => {
   }
 });
 
+// Single instance for the app
+const shouldQuit = app.makeSingleInstance(() => {
+  if (mainWindow) {
+    if (mainWindow.isMinimized()) {
+      mainWindow.restore();
+    }
+    mainWindow.focus();
+  }
+});
+if (shouldQuit) {
+  app.quit();
+}
+
 // User ask for update
 ipcMain.on('tag', (event, pictures, city) => {
   const promises = [];
