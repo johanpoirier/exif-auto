@@ -1,5 +1,7 @@
 {
-  "name"    : "exif-auto",
-  "version" : "0.0.1",
-  "main"    : "main.js"
+  "name": "exif-auto",
+  "version": "0.0.1",
+  "author": "JoPs",
+  "description": "Auto rename photos with infos from exif tags",
+  "main": "main.js"
 }
