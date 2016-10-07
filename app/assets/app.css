@@ -16,13 +16,56 @@ main {
     min-width: 100vh;
 }
 
+.btn {
+    border: none;
+    background-color: grey;
+    border-radius: 5px;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+    height: 2.4rem;
+    line-height: 2.2rem;
+    margin: 0 1rem;
+    min-width: 10rem;
+    outline: 0;
+    padding: 0 1rem;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+input[type='file'] {
+    display: none;
+}
+
 .files {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
     padding: 1rem;
     width: 70vw;
 }
 
+.file-list {
+    border: 2px inset;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    list-style: none;
+    padding: 1rem;
+    width: 100%;
+}
+
+.file {
+    padding-bottom: 0.2rem;
+}
+
 aside {
-    border-left: 1px solid grey;
+    align-items: center;
+    box-shadow: 0 0 10px black;
+    display: flex;
+    justify-content: center;
     padding: 1rem;
     width: 30vw;
 }
