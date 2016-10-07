@@ -6,19 +6,22 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <link rel="stylesheet" href="assets/app.css">
+    <script src="node_modules/weld/lib/weld.js"></script>
 </head>
 <body>
     <main>
         <section class="files">
-            <button>Ajouter des photos</button>
-            <ul>
-                <li>Plop</li>
-                <li>Plap</li>
+            <input id="filesInput" type="file" multiple accept="image/*" />
+            <ul class="file-list">
+                <li>
+                    <span class="name">IMG_0089.jpg</span>
+                </li>
             </ul>
         </section>
         <aside>
-            <button>Tag files</button>
+            <button id="tagIt">Tag files</button>
         </aside>
     </main>
+    <script src="index.js"></script>
 </body>
 </html>

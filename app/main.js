@@ -1,8 +1,10 @@
 const electron = require('electron');
-// Module to control application life.
-const {app} = electron;
-// Module to create native browser window.
-const {BrowserWindow} = electron;
+const exif = require('jpeg-exif');
+const moment = require('moment');
+const fs = require('fs');
+const path = require('path');
+
+const { app, globalShortcut, BrowserWindow, ipcMain } = electron;
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -42,3 +44,42 @@ app.on('activate', () => {
     createWindow();
   }
 });
+
+// User ask for update
+ipcMain.on('tag', (event, pictures, city) => {
+  const promises = [];
+  console.log(`Tag ${pictures.length} files with ${city} location:`);
+  pictures.forEach((path) => {
+    promises.push(tagFile(path, city));
+  });
+  Promise.all(promises).then((results) => win.webContents.send('files', results));
+});
+
+const EXIF_DATE_FORMAT = 'YYYY:MM:DD HH:mm:ss';
+const APP_EXPORT_DATE_FORMAT = 'YYYY_MM_DD_HH[h]mm[.]ss';
+
+function tagFile(filePath, city) {
+  return new Promise((resolve) => {
+    exif.parse(filePath, (err, data) => {
+      if (err) {
+        resolveError(resolve, err, filePath);
+        return;
+      }
+
+      const newFileName = `${moment(data['ModifyDate'], EXIF_DATE_FORMAT).format(APP_EXPORT_DATE_FORMAT)} - ${city}.jpg`;
+      try {
+        fs.renameSync(filePath, path.join(path.dirname(filePath), newFileName));
+      } catch(err) {
+        resolveError(resolve, err, filePath);
+      }
+
+      console.log(` [X] ${path.dirname(filePath)} -> ${newFileName}: OK`);
+      resolve(newFileName);
+    });
+  });
+}
+
+function resolveError(resolve, error, filePath) {
+  console.log(` [ ] ${filePath}: problem parsing EXIF data on file`, error);
+  resolve(filePath);
+}
