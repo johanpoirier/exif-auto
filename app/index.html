@@ -11,18 +11,30 @@
 <body>
     <main>
         <section class="files">
-            <button class="btn" id="select">Ajouter des photos</button>
+            <div class="controls">
+                <button class="btn" id="select">Sélectionner des photos</button>
+                <button class="btn" id="removeAll">Tout enlever</button>
+            </div>
             <input id="filesInput" type="file" multiple accept="image/*" />
             <ul class="file-list">
                 <li class="file">
                     <span class="name"></span>
                 </li>
             </ul>
+            <footer></footer>
         </section>
         <aside>
-            <button class="btn" id="tagIt">Tag files</button>
+            <button class="btn btn-reverse" id="tagIt">Tag files</button>
+            <div class="new-location">
+                <label for="locationInput">Lieu</label>
+                <input type="text" id="locationInput" value="" />
+            </div>
+            <ul class="locations">
+                <li class="location"><span class="location-label"></span></li>
+            </ul>
         </aside>
     </main>
+
     <script src="index.js"></script>
 </body>
 </html>

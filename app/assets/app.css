@@ -35,6 +35,11 @@ main {
     white-space: nowrap;
 }
 
+.btn-reverse {
+    background-color: white;
+    color: grey;
+}
+
 input[type='file'] {
     display: none;
 }
@@ -43,8 +48,18 @@ input[type='file'] {
     align-items: center;
     display: flex;
     flex-direction: column;
-    padding: 1rem;
     width: 70vw;
+}
+
+.files footer {
+    align-self: flex-start;
+    background-color: #6891dc;
+    height: 10px;
+    width: 0%;
+}
+
+.controls {
+    margin: 1rem;
 }
 
 .file-list {
@@ -54,7 +69,7 @@ input[type='file'] {
     height: 100%;
     list-style: none;
     padding: 1rem;
-    width: 100%;
+    width: 96%;
 }
 
 .file {
@@ -63,9 +78,47 @@ input[type='file'] {
 
 aside {
     align-items: center;
+    background-color: #454545;
     box-shadow: 0 0 10px black;
+    color: white;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     padding: 1rem;
     width: 30vw;
+}
+
+.new-location {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: 1rem;
+    width: 100%;
+}
+
+.new-location > input {
+    border: none;
+    border-radius: 0.2rem;
+    margin-left: 1rem;
+    padding: 0.5rem;
+    width: 60%;font-size: 1rem;
+}
+
+.locations {
+    list-style: none;
+    width: 90%;
+}
+
+.location {
+    background-color: #a5e5ff;
+    color: #000;
+    cursor: pointer;
+    margin: 0.2rem 0;
+    padding: 0.5rem;
+    text-align: center;
+    width: 100%;
+}
+
+
+.location:empty {
+    background-color: transparent;
 }

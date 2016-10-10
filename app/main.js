@@ -21,7 +21,9 @@ function createWindow() {
   win.loadURL(`file://${__dirname}/index.html`);
 
   // Open the DevTools.
-  win.webContents.openDevTools();
+  globalShortcut.register('CommandOrControl+Alt+I', () => {
+    win.openDevTools();
+  });
 
   // Emitted when the window is closed.
   win.on('closed', () => {
@@ -30,6 +32,19 @@ function createWindow() {
     // when you should delete the corresponding element.
     win = null;
   });
+}
+
+// Single instance for the app
+const shouldQuit = app.makeSingleInstance(() => {
+  if (win) {
+    if (win.isMinimized()) {
+      win.restore();
+    }
+    win.focus();
+  }
+});
+if (shouldQuit) {
+  app.quit();
 }
 
 // This method will be called when Electron has finished
@@ -45,17 +60,13 @@ app.on('activate', () => {
   }
 });
 
-// Single instance for the app
-const shouldQuit = app.makeSingleInstance(() => {
-  if (mainWindow) {
-    if (mainWindow.isMinimized()) {
-      mainWindow.restore();
-    }
-    mainWindow.focus();
-  }
+app.on('will-quit', () => {
+  // Unregister all shortcuts.
+  globalShortcut.unregisterAll();
 });
-if (shouldQuit) {
-  app.quit();
+
+function notifyTag(filePath) {
+  win.webContents.send('tagged', filePath);
 }
 
 // User ask for update
@@ -63,7 +74,7 @@ ipcMain.on('tag', (event, pictures, city) => {
   const promises = [];
   console.log(`Tag ${pictures.length} files with ${city} location:`);
   pictures.forEach((path) => {
-    promises.push(tagFile(path, city));
+    promises.push(tagFile(path, city, notifyTag));
   });
   Promise.all(promises).then((results) => win.webContents.send('files', results));
 });
@@ -71,7 +82,7 @@ ipcMain.on('tag', (event, pictures, city) => {
 const EXIF_DATE_FORMAT = 'YYYY:MM:DD HH:mm:ss';
 const APP_EXPORT_DATE_FORMAT = 'YYYY_MM_DD_HH[h]mm[.]ss';
 
-function tagFile(filePath, city) {
+function tagFile(filePath, city, callback) {
   return new Promise((resolve) => {
     exif.parse(filePath, (err, data) => {
       if (err) {
@@ -87,6 +98,9 @@ function tagFile(filePath, city) {
       }
 
       console.log(` [X] ${path.dirname(filePath)} -> ${newFileName}: OK`);
+      if (callback) {
+        callback(filePath);
+      }
       resolve(newFileName);
     });
   });
