@@ -1,8 +1,8 @@
 {
-  "name": "exif-auto",
-  "productName": "EXIF Auto",
+  "name": "exifoto",
+  "productName": "ExiFoto",
   "description": "Auto rename photos with infos from exif tags",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "JoPs",
   "main": "main.js",
   "license": "MIT",

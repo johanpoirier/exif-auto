@@ -1,6 +1,6 @@
 {
   "name": "exif-auto",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Auto rename photos with infos from exif tags",
   "private": true,
   "directories": {
